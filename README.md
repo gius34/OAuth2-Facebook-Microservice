@@ -37,7 +37,25 @@ git clone https: https://github.com/gius34/OAuth2-Facebook-Microservice.git
 
 ### Configurazione del DB MySQL
 Script per creare il DB MySql
+```sql
+CREATE DATABASE my_photos;
 
+CREATE TABLE 'customer'(
+'customer_id' INT NOT NULL AUTO_INCREMENT,
+'email' VARCHAR(45) NOT NULL,
+'pwd' VARCHAR(200) NOT NULL,
+'role' VARCHAR(45) INT NOT NULL,
+PRIMARY KEY('customer_id')
+);
+
+CREATE TABLE 'photo'(
+'id' INT NOT NULL AUTO_INCREMENT,
+'url' VARCHAR(45),
+PRIMARY KEY('id')
+);
+
+INSERT INTO my_photos.photo VALUES (NULL, './img/01.png');
+```
 
 ### Configurazione del file 'application.properties'
 Modificare il file 'application.properties'
