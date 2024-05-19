@@ -9,6 +9,10 @@ Questo progetto è un microservizio sviluppato con Spring Boot che utilizza Spri
 - Uso
 
 ## Descrizione
+Questo progetto è un microservizio per la visualizzazione di una galleria di foto, che utilizza Spring Boot e Spring Security 6 per il back-end e Thymeleaf per il front-end. L'app offre funzionalità di autenticazione sia tramite OAuth2 (con provider di autenticazione Facebook) che tramite user e password. Gestisce due ruoli utente: `USER` e `ADMIN`, con differenti permessi di accesso alle funzionalità dell'app.
+
+### OAuth2 Single Sign-On
+L'applicazione utilizza OAuth 2.0 per implementare il Single Sign-On (SSO) con Facebook. Questa funzionalità consente agli utenti di autenticarsi con le loro credenziali Facebook, senza dover ricordare un nuovo set di credenziali specifiche per l'app. L'applicazione utilizza un tipo di OAuth 2.0 grant chiamato Authorization Code Grant, per ottenere un token di accesso da Facebook (il server di autorizzazione). Con questo token, l'app può chiedere a Facebook alcuni dettagli personali dell'utente, come l'ID di accesso, il nome e l'email. In questo scenario, Facebook funge da Resource Server, decodificando il token che viene fornito dall'app e determinando se consentire all'app l'accesso ai dettagli dell'utente. Se il processo ha esito positivo, l'applicazione inserisce le informazioni dell'utente nel contesto di Spring Security in modo che l'utente venga autenticato.
 
 ## Prerequisiti
 - Java 11 o superiore
@@ -21,7 +25,10 @@ Questo progetto è un microservizio sviluppato con Spring Boot che utilizza Spri
 ### Clonazione del Repository
 
 Clona il repository del progetto nella macchina locale:
+```bash
 git clone https: https://github.com/gius34/OAuth2-Facebook-Microservice.git
+cd OAuth2-Facebook-Microservice
+```
 
 ### Import del progetto in Eclipse
 1. Apri Eclipse
@@ -33,7 +40,7 @@ git clone https: https://github.com/gius34/OAuth2-Facebook-Microservice.git
 ### Configurazione dell'App Facebook
 1. Vai: https://developers.facebook.com/
 2. Crea una nuova app
-3. Ottieni l'ID App e la Chiave segreta
+3. Ottieni `Client ID` e `Client Secret`
 
 ### Configurazione del DB MySQL
 Script per creare il DB MySql
@@ -62,8 +69,8 @@ Modificare il file 'application.properties'
 
 Inserire le credenziali Facebook:
 ```bash
-spring.security.oauth2.client.registration.facebook.client-id=ID App
-spring.security.oauth2.client.registration.facebook.client-secret=Chiave segreta
+spring.security.oauth2.client.registration.facebook.client-id=Client ID
+spring.security.oauth2.client.registration.facebook.client-secret=Client Secret
 ```
 
 Inserire le credenziali del DB MySQL:
