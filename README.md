@@ -100,12 +100,9 @@ spring.datasource.password=password
    
    - In questa pagina è possibile visualizzare le immagini presenti nella galleria
    - Pagina accessibile sia agli utenti con ruolo `USER` sia agli utenti con ruolo `ADMIN`
-   - >[!NOTE]
+     >**Note**
      >
      >Le immagini sono salvate al seguente percorso: `/src/main/resources/static/img`
-     > 
-     >
-     > Useful information that users should know, even when skimming content.
 
    5.2 **Gestire le immagini presenti nella galleria**
    
