@@ -94,4 +94,23 @@ spring.datasource.password=password
 
 4. Dopo che il primo utente si sarà registrato, tutti i successivi utenti che si registreranno avranno il ruolo di `USER`.
 
-   Gli utenti con ruolo `USER` possono solo visualizzare le immagini presenti nella galleria (ovvero, nel database); mentre gli utenti con ruolo `ADMIN` possono visualizzare, aggiungere e eliminare le immagini presenti nella galleria.
+5. Dopo l'autenticazione, gli utenti vengono reindirizzati alla pagina `/home`, accessibile solo agli utenti autenticati. Da questa pagina, gli utenti possono:
+
+   5.1 **Visualizzare le immagini presenti nella galleria**
+   
+   - In questa pagina è possibile visualizzare le immagini presenti nella galleria
+   - Pagina accessibile sia agli utenti con ruolo `USER` sia agli utenti con ruolo `ADMIN`
+   - >[!NOTE]
+     >
+     >Le immagini sono salvate al seguente percorso: `/src/main/resources/static/img`
+     > 
+     >
+     > Useful information that users should know, even when skimming content.
+
+   5.2 **Gestire le immagini presenti nella galleria**
+   
+   - In questa pagina è possibile aggiungere o eliminare le immagini presenti nella galleria
+   - Pagina accessibile solo agli utenti con ruolo `ADMIN`
+
+   5.3 **Effettuare il logout**
+
