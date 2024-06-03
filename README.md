@@ -16,6 +16,7 @@ L'applicazione utilizza OAuth 2.0 per implementare il Single Sign-On (SSO) con F
 
 ## Prerequisiti
 - Java 11 o superiore
+- Maven
 - MySQL Database
 - Un account sviluppatore Facebook
 - Un'app Facebook configurata per OAuth2
