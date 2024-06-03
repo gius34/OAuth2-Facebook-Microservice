@@ -83,15 +83,14 @@ spring.datasource.password=password
    - Visita la pagina di registrazione all'indirizzo: `http://localhost:8080/register`
    - Inserire i dettagli richiesti (email e password) per completare la registrazione
      
-     ![image](https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/bc517e1b-d7a3-44d2-9af1-001ab654c2f4)
-
+     <img width="454" alt="image" src="https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/01238997-6043-4840-a7dd-56341ee3131d">
 
    3.2 **Registrazione tramite OAuth2 SSO**
    
    - Visita la pagina di login all'indirizzo: `http://localhost:8080/login`
-   - Selezionare l'opzione `Login with Facebook`. Dopo l'autenticazione tramite Facebook, l'utente riceverà automaticamente il ruolo di `ADMIN`
+   - Selezionare l'opzione `Login with Facebook`. Dopo l'autenticazione tramite Facebook, l'utente riceverà automaticamente il ruolo di `ADMIN` (se il database non conterrà ancora utenti)
 
-     ![image](https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/ddb7456a-3c8f-4de4-aa00-bd0b638d5f5a)
+     <img width="455" alt="image" src="https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/cd4c0be7-a85c-4bd9-8365-ab44bd4b63f3">
 
 4. Dopo che il primo utente si sarà registrato, tutti i successivi utenti che si registreranno avranno il ruolo di `USER`.
 
