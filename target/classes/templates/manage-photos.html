@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+    	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<title>Gestisci foto</title>
+		
+		<!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	    
+	    <!-- Font Awesome CSS -->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	    
+	    <!-- jQuery -->
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	    
+	    <!-- Toastify JS -->
+	    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+		
+		<script type="text/javascript">
+				$(document).ready(function() {
+					
+					// Ottieni il token CSRF e il nome dell'header dai meta tag
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
+					
+					// Funzione per validare un URL
+					function isValidUrl(url) {
+					    var urlPattern = /^(\/|\.\/)[a-zA-Z0-9_\/\-\.]+$/;
+					    return urlPattern.test(url);
+					}
+					
+					// dynamic version
+	
+					loadPhotos();
+					
+					$('.add-photo').on('click', function() {
+						
+						var newUrl = prompt('What is the new url?');
+						
+						if (newUrl === null) {
+							
+						} else if (newUrl === '') {
+							
+							alert('Url value is required');
+							
+						} else if (!isValidUrl(newUrl)) {
+							
+							alert('Invalid URL');
+						} else {
+							
+							$.ajax({
+								url : '/api/managephotos',
+								method : 'post',
+								contentType : 'application/json',
+								data : JSON.stringify({
+									url : newUrl
+								}),
+								beforeSend: function(xhr) {
+								    xhr.setRequestHeader(header, token);
+								},
+								success : function(data) {
+									
+									loadPhotos();
+									
+									//alert('Photo added successfully');
+									var myToast = Toastify({
+										text: "Photo added successfully",
+										duration: 2000
+									});
+	
+									myToast.showToast();								
+								}
+							});            		
+						}				
+					});		
+					
+					$('tbody').on('click', '.delete', function() {
+						
+						var elementToRemove = $(this).parent();
+						var id = $(this).data('id');
+						
+						$.ajax({
+							url : '/api/managephotos/' + id,
+							method : 'delete',
+							beforeSend: function(xhr) {
+							    xhr.setRequestHeader(header, token);
+							},
+							success : function(data) {
+								
+								elementToRemove.remove();
+	
+								var myToast = Toastify({
+									text: "Photo removed successfully",
+									duration: 2000
+								});
+	
+								myToast.showToast();								
+							}
+						});            		
+					});
+					
+					function loadPhotos() {
+						
+						$('tbody').html('');
+						
+						$.ajax({
+							url : '/api/viewphotos',
+							method : 'get',
+							success : function(data) {
+								
+								for(var i = data.length - 1; i >= 0; i--) {
+									
+									$('tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].url + '</td><td><img src="' + data[i].url + '" width="100" height = "100" /></td><td class="delete pointer" data-id="'+ data[i].id +'"><i class="fa fa-trash" aria-hidden="true"></i></td></tr>');
+								}
+												
+							}
+						});
+					}
+					
+				});
+				
+			</script>
+	</head>
+	<body>
+
+		<div class="align-right">
+    
+		    <form th:action="@{home}" method="post" class="float-left ml-3 mt-3">
+		        <button type="submit" class="btn btn-primary"><i class="fas fa-home"></i> Home</button>
+		    </form>
+		    <div class="btn btn-info add-photo mt-3 ml-2">Add New Photo&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></div>
+		</div>
+	
+		<!-- Contenuto principale -->
+		<main class="container mt-4">
+	
+			<h2 class="mb-4">Gestisci Foto</h2>
+	        <table class="table">
+	            <thead class="thead-dark">
+	                <tr>
+	                    <th scope="col">Id</th>
+	                    <th scope="col">Image URL</th>
+	                    <th scope="col">Image Preview</th>
+	                    <th scope="col">Delete</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <!-- Le foto verranno caricate qui tramite JavaScript -->
+	            </tbody>
+	        </table>
+	
+		</main>
+	
+	</body>
+</html>
