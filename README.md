@@ -4,12 +4,11 @@ Questo progetto è un microservizio sviluppato con Spring Boot che utilizza Spri
 ## Sommario
 - Descrizione
 - Prerequisiti
-- Installazione
 - Configurazione
 - Uso
 
 ## Descrizione
-Questo progetto è un microservizio per la visualizzazione di una galleria di foto, che utilizza Spring Boot e Spring Security 6 per il back-end e Thymeleaf per il front-end. L'app offre funzionalità di autenticazione sia tramite OAuth2 (con provider di autenticazione Facebook) che tramite user e password. Gestisce due ruoli utente: `USER` e `ADMIN`, con differenti permessi di accesso alle funzionalità dell'app.
+Questo progetto è un microservizio per la visualizzazione di una galleria di foto, che utilizza Spring Boot e Spring Security 6 per il back-end e Thymeleaf per il front-end. L'app offre la funzionalità di autenticazione sia tramite OAuth2 (con provider di autenticazione Facebook) che tramite user e password. Gestisce due ruoli utente: `USER` e `ADMIN`, con differenti permessi di accesso alle funzionalità dell'app.
 
 ### OAuth2 Single Sign-On
 L'applicazione utilizza OAuth 2.0 per implementare il Single Sign-On (SSO) con Facebook. Questa funzionalità consente agli utenti di autenticarsi con le loro credenziali Facebook, senza dover ricordare un nuovo set di credenziali specifiche per l'app. In particolare, l'applicazione utilizza un tipo di OAuth 2.0 grant chiamato Authorization Code Grant, per ottenere un token di accesso da Facebook (il server di autorizzazione). Con questo token, l'app può chiedere a Facebook alcuni dettagli personali dell'utente, come l'ID di accesso, il nome e l'email. In questo scenario, Facebook funge da Resource Server, decodificando il token che viene fornito dall'app e determinando se consentire all'app l'accesso ai dettagli dell'utente. Se il processo ha esito positivo, l'applicazione inserisce le informazioni dell'utente nel contesto di Spring Security in modo che l'utente venga autenticato.
@@ -88,9 +87,10 @@ spring.datasource.password=password
    3.2 **Registrazione tramite OAuth2 SSO**
    
    - Visita la pagina di login all'indirizzo: `http://localhost:8080/login`
-   - Selezionare l'opzione `Login with Facebook`. Dopo l'autenticazione tramite Facebook, l'utente riceverà automaticamente il ruolo di `ADMIN` (se il database non conterrà ancora utenti)
+   - Selezionare l'opzione `Login con Facebook`. Dopo l'autenticazione tramite Facebook, l'utente riceverà automaticamente il ruolo di `ADMIN` (se il database non conterrà ancora utenti)
 
-     <img width="455" alt="image" src="https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/cd4c0be7-a85c-4bd9-8365-ab44bd4b63f3">
+     ![image](https://github.com/gius34/OAuth2-Facebook-Microservice/assets/34596825/aa8e1b14-283f-48d4-8028-f4ceff07e147)
+
 
 4. Dopo che il primo utente si sarà registrato, tutti i successivi utenti che si registreranno avranno il ruolo di `USER`.
 
